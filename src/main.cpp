@@ -84,6 +84,14 @@ char clientId[20] = {0}; // unique ClientID
 void setup() {
   char features[100] = "";
 
+  // Reduce power consumption (optional)
+  // This reduces the power consumption with about 50 mWatt.
+  // Typically a TTGO T-beam v1.0 uses 660 mWatt when the CPU frequency is set to 80 MHz.
+  // When left running at 240 mHz, the power consumption is about 710 - 730 mWatt.
+  // Higher CPU speed may be preferred for wifi & ble sniffing.
+  //
+  // setCpuFrequencyMhz(80);
+
   // disable brownout detection
 #ifdef DISABLE_BROWNOUT
   // register with brownout is at address DR_REG_RTCCNTL_BASE + 0xd4
@@ -146,6 +154,8 @@ void setup() {
              ESP.getFlashChipSpeed());
     ESP_LOGI(TAG, "Wifi/BT software coexist version %s",
              esp_coex_version_get());
+    ESP_LOGI(TAG, "Wifi STA MAC: %s",
+             WiFi.macAddress().c_str());
 
 #if (HAS_LORA)
     ESP_LOGI(TAG, "IBM LMIC version %d.%d.%d", LMIC_VERSION_MAJOR,
