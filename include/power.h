@@ -43,6 +43,15 @@
 #endif
 #endif
 
+#ifdef ADC_SW
+#ifndef ADC_POWER_ON
+#define ADC_POWER_ON 1
+#endif
+#ifndef ADC_POWER_OFF
+#define ADC_POWER_OFF (!ADC_POWER_ON)
+#endif
+#endif
+
 #ifdef BAT_MEASURE_ADC_UNIT // ADC2 wifi bug workaround
 extern RTC_NOINIT_ATTR uint64_t RTC_reg_b;
 #include "soc/sens_reg.h" // needed for adc pin reset
@@ -56,14 +65,37 @@ bool batt_sufficient(void);
 extern int8_t batt_level;
 
 #ifdef HAS_PMU
-#include <XPowersLib.h>
-extern XPowersPMU pmu;
+
+#include "XPowersLib.h"
+extern XPowersLibInterface *pmu;
+#ifdef XPOWERS_CHIP_AXP192
+extern XPowersAXP192 *axp192;
+#elif defined XPOWERS_CHIP_AXP2101
+extern XPowersAXP2101 *axp2101;
+#endif
+
+#ifndef PMU_SDA
+#define PMU_SDA SDA
+#endif
+
+#ifndef PMU_SCL
+#define PMU_SCL SCL
+#endif
+
+#ifndef PMU_WIRE
+#define PMU_WIRE Wire
+#else
+#define WIRE1_PIN_DEFINED
+#define SDA1 PMU_SDA
+#define SCL1 PMU_SCL
+#endif
+
 enum pmu_power_t { pmu_power_on, pmu_power_off, pmu_power_sleep };
 void IRAM_ATTR PMUIRQ();
-void AXP192_powerevent_IRQ(void);
-void AXP192_power(pmu_power_t powerlevel);
-void AXP192_init(void);
-void AXP192_showstatus(void);
+void PMU_powerevent_IRQ(void);
+void PMU_power(pmu_power_t powerlevel);
+void PMU_init(void);
+void PMU_showstatus(void);
 #endif // HAS_PMU
 
 #ifdef HAS_IP5306

@@ -5,8 +5,8 @@
 *With LoRa radio data transfer*:
 
 - **LILYGO®: [Paxcounter LoRa V2.1*](https://de.aliexpress.com/item/32915894264.html)**
-- TTGO: T1*, T2*, T3*, T-Beam, T-Fox
-- Heltec: LoRa-32 v1 and v2
+- TTGO: T1*, T2*, T3*, T-Beam (1.0/1.1/1.2), T-Fox, T-Supreme*, T-Display, T-Dongle
+- Heltec: LoRa-32 v1/v2/v3, Stick Lite V3
 - Pycom: LoPy, LoPy4, FiPy
 - Radioshuttle.de: [ECO Power Board](https://www.radioshuttle.de/esp32-eco-power/esp32-eco-power-board/)
 - WeMos: LoLin32 + [LoraNode32 shield](https://github.com/hallard/LoLin32-Lora),
@@ -35,7 +35,7 @@ Depending on board hardware following features are supported:
 - [OLED Display](display-led.md) (shows detailed status)
 - RGB LED (shows colorized status)
 - Button (short press: flip display page / long press: send alarm message)
-- Battery voltage monitoring (analog read / AXP192 / IP5306)
+- Battery voltage monitoring (analog read / AXP192 / AXP202 / AXP2101 / IP5306)
 - GPS (Generic serial NMEA, or Quectel L76 I2C)
 - Environmental sensors (Bosch BMP180/BME280/BME680/BMP280 I2C; SDS011 serial)
 - Real Time Clock (Maxim DS3231 I2C)
